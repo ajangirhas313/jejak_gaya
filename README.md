@@ -6,14 +6,15 @@ Jejak gaya adalah platform e-commerce yang khusus menjual sepatu merk Nike. Kami
 
 ## Fitur
 
--Daftar akun user
--Memasukkan produk kedalam keranjang user
--Dashboard admin
--Melihat jumlah keseluruhan dari produk dan pesanan pelanggan
--CRUD data produk
--CRUD data ukuran
--CRUD data stok produk
--tambah akun admin
+- Daftar akun user
+- Memasukkan produk kedalam keranjang user
+- Dashboard admin
+- Melihat jumlah keseluruhan dari produk dan pesanan pelanggan
+- CRUD data produk
+- CRUD data ukuran
+- CRUD data stok produk
+- tambah akun admin
+
 
 ![alt text](erd_jejak_gaya.png)
 
@@ -94,4 +95,5 @@ CREATE TABLE Payment (
     payment_status VARCHAR(50) CHECK (payment_status IN ('paid', 'unpaid', 'failed')) DEFAULT 'unpaid',
     payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 
