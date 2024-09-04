@@ -15,6 +15,7 @@ Jejak gaya adalah platform e-commerce yang khusus menjual sepatu merk Nike. Kami
 - CRUD data stok produk
 - tambah akun admin
 
+## ERD
 
 ![alt text](erd_jejak_gaya.png)
 
