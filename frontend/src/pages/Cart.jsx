@@ -141,7 +141,7 @@ export default function Cart() {
                     <p className="text-sm text-gray-500">
                       Price:{" "}
                       <span className="font-semibold text-gray-700">
-                        ${calculateSubtotal(item).toFixed(2)}
+                        Rp.{calculateSubtotal(item)}
                       </span>
                     </p>
                   </div>
@@ -165,7 +165,7 @@ export default function Cart() {
             </h3>
             <div className="flex justify-between text-gray-800 text-lg mb-4 border-b border-gray-300 pb-4">
               <p className="font-medium">Subtotal:</p>
-              <p className="font-semibold">${calculateTotal().toFixed(2)}</p>
+              <p className="font-semibold">Rp.{calculateTotal().toFixed(2)}</p>
             </div>
             <div className="flex justify-between text-gray-800 text-lg mb-6 border-b border-gray-300 pb-4">
               <p className="font-medium">Total:</p>

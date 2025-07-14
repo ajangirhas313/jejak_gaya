@@ -278,7 +278,7 @@ app.get('/api/orders', authenticateToken, async (req, res) => {
       FROM 
         Orders o
       JOIN 
-        OrderItems oi ON o.id = oi.order_id
+        Order_Items oi ON o.id = oi.order_id
       JOIN 
         Products p ON oi.product_id = p.id
       ORDER BY 
@@ -590,7 +590,7 @@ app.post('/checkout', authenticateToken, async (req, res) => {
 
       // Simpan detail order ke tabel OrderItems
       await client.query(
-        `INSERT INTO OrderItems (order_id, product_id, size, quantity, price) 
+        `INSERT INTO Order_Items (order_id, product_id, size, quantity, price) 
          VALUES ($1, $2, $3, $4, (SELECT price FROM Products WHERE id = $2))`,
         [order_id, product_id, size, quantity]
       );

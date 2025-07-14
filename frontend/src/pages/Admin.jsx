@@ -82,9 +82,9 @@ export default function Admin() {
           image_url: "",
           category: "",
         });
-        setProductId(product.id); 
-        setShowProductModal(false); 
-        setShowStockModal(true); 
+        setProductId(product.id);
+        setShowProductModal(false);
+        setShowStockModal(true);
         showNotificationMessage("Product added successfully!");
       } else {
         showNotificationMessage("Failed to add product.");
@@ -131,7 +131,7 @@ export default function Admin() {
 
         setTimeout(() => {
           setShowNotification(false);
-        }, 3000); 
+        }, 3000);
       }
     } catch (err) {
       setNotification("An error occurred. Please try again: " + err);
@@ -140,7 +140,7 @@ export default function Admin() {
 
       setTimeout(() => {
         setShowNotification(false);
-      }, 3000); 
+      }, 3000);
     }
   };
 
@@ -309,7 +309,10 @@ export default function Admin() {
     navigate("/admin");
   };
 
-  if (!Cookies.get("token") || jwtDecode(Cookies.get("token")).role !== "admin") {
+  if (
+    !Cookies.get("token") ||
+    jwtDecode(Cookies.get("token")).role !== "admin"
+  ) {
     navigate("/");
   } else
     return (
@@ -339,7 +342,6 @@ export default function Admin() {
           >
             Add Product
           </button>
-
 
           {/* Product List in Table Format */}
           <div className="mt-6 overflow-x-auto">
@@ -374,7 +376,7 @@ export default function Admin() {
                       {product.name}
                     </td>
                     <td className="border border-blue-200 p-3">
-                      ${product.price}
+                      Rp.{product.price}
                     </td>
                     <td className="border border-blue-200 p-3">
                       {product.category}
@@ -429,244 +431,248 @@ export default function Admin() {
         </div>
 
         {/* Product Modal */}
-{showProductModal && (
-  <div className="fixed inset-0 flex items-center justify-center bg-sky-200 bg-opacity-70">
-    <div className="bg-white p-8 rounded-2xl shadow-2xl w-96 transform transition-all duration-300 hover:shadow-3xl">
-      <h3 className="text-2xl font-bold text-sky-700 mb-4 text-center">
-        {editProduct ? "Edit Product" : "Add New Product"}
-      </h3>
-      <div className="mt-4 space-y-4">
-        <input
-          type="text"
-          placeholder="Name"
-          value={editProduct ? editProduct.name : newProduct.name}
-          onChange={(e) => {
-            if (editProduct) {
-              setEditProduct({ ...editProduct, name: e.target.value });
-            } else {
-              setNewProduct({ ...newProduct, name: e.target.value });
-            }
-          }}
-          className="w-full border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
-        />
-        <input
-          type="text"
-          placeholder="Description"
-          value={
-            editProduct ? editProduct.description : newProduct.description
-          }
-          onChange={(e) => {
-            if (editProduct) {
-              setEditProduct({
-                ...editProduct,
-                description: e.target.value,
-              });
-            } else {
-              setNewProduct({
-                ...newProduct,
-                description: e.target.value,
-              });
-            }
-          }}
-          className="w-full border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
-        />
-        <input
-          type="number"
-          placeholder="Price"
-          value={editProduct ? editProduct.price : newProduct.price}
-          onChange={(e) => {
-            if (editProduct) {
-              setEditProduct({ ...editProduct, price: e.target.value });
-            } else {
-              setNewProduct({ ...newProduct, price: e.target.value });
-            }
-          }}
-          className="w-full border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
-        />
-        <input
-          type="text"
-          placeholder="Image URL"
-          value={editProduct ? editProduct.image_url : newProduct.image_url}
-          onChange={(e) => {
-            if (editProduct) {
-              setEditProduct({
-                ...editProduct,
-                image_url: e.target.value,
-              });
-            } else {
-              setNewProduct({
-                ...newProduct,
-                image_url: e.target.value,
-              });
-            }
-          }}
-          className="w-full border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
-        />
+        {showProductModal && (
+          <div className="fixed inset-0 flex items-center justify-center bg-sky-200 bg-opacity-70">
+            <div className="bg-white p-8 rounded-2xl shadow-2xl w-96 transform transition-all duration-300 hover:shadow-3xl">
+              <h3 className="text-2xl font-bold text-sky-700 mb-4 text-center">
+                {editProduct ? "Edit Product" : "Add New Product"}
+              </h3>
+              <div className="mt-4 space-y-4">
+                <input
+                  type="text"
+                  placeholder="Name"
+                  value={editProduct ? editProduct.name : newProduct.name}
+                  onChange={(e) => {
+                    if (editProduct) {
+                      setEditProduct({ ...editProduct, name: e.target.value });
+                    } else {
+                      setNewProduct({ ...newProduct, name: e.target.value });
+                    }
+                  }}
+                  className="w-full border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                />
+                <input
+                  type="text"
+                  placeholder="Description"
+                  value={
+                    editProduct
+                      ? editProduct.description
+                      : newProduct.description
+                  }
+                  onChange={(e) => {
+                    if (editProduct) {
+                      setEditProduct({
+                        ...editProduct,
+                        description: e.target.value,
+                      });
+                    } else {
+                      setNewProduct({
+                        ...newProduct,
+                        description: e.target.value,
+                      });
+                    }
+                  }}
+                  className="w-full border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                />
+                <input
+                  type="number"
+                  placeholder="Price"
+                  value={editProduct ? editProduct.price : newProduct.price}
+                  onChange={(e) => {
+                    if (editProduct) {
+                      setEditProduct({ ...editProduct, price: e.target.value });
+                    } else {
+                      setNewProduct({ ...newProduct, price: e.target.value });
+                    }
+                  }}
+                  className="w-full border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                />
+                <input
+                  type="text"
+                  placeholder="Image URL"
+                  value={
+                    editProduct ? editProduct.image_url : newProduct.image_url
+                  }
+                  onChange={(e) => {
+                    if (editProduct) {
+                      setEditProduct({
+                        ...editProduct,
+                        image_url: e.target.value,
+                      });
+                    } else {
+                      setNewProduct({
+                        ...newProduct,
+                        image_url: e.target.value,
+                      });
+                    }
+                  }}
+                  className="w-full border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                />
 
-        {/* Mengubah input kategori menjadi select */}
-        <select
-          value={editProduct ? editProduct.category : newProduct.category}
-          onChange={(e) => {
-            if (editProduct) {
-              setEditProduct({
-                ...editProduct,
-                category: e.target.value,
-              });
-            } else {
-              setNewProduct({
-                ...newProduct,
-                category: e.target.value,
-              });
-            }
-          }}
-          className="w-full border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
-        >
-          <option value="">Select Category</option>
-          <option value="lifestyle">Lifestyle</option>
-          <option value="running">Running</option>
-          <option value="basketball">Basketball</option>
-          <option value="football">Football</option>
-          <option value="gym and training">Gym and Training</option>
-        </select>
-      </div>
-      <div className="mt-6 flex justify-center space-x-4">
-        <button
-          onClick={editProduct ? handleEditProduct : handleAddProduct}
-          className="bg-gradient-to-r from-sky-500 to-sky-700 text-white px-6 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-sky-600 hover:to-sky-800"
-        >
-          {editProduct ? "Save Changes" : "Add Product"}
-        </button>
-        <button
-          onClick={() => {
-            setEditProduct(null)
-            setShowProductModal(false)
-          }}
-          className="bg-gradient-to-r from-red-400 to-red-600 text-white px-6 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-red-500 hover:to-red-700"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
+                {/* Mengubah input kategori menjadi select */}
+                <select
+                  value={
+                    editProduct ? editProduct.category : newProduct.category
+                  }
+                  onChange={(e) => {
+                    if (editProduct) {
+                      setEditProduct({
+                        ...editProduct,
+                        category: e.target.value,
+                      });
+                    } else {
+                      setNewProduct({
+                        ...newProduct,
+                        category: e.target.value,
+                      });
+                    }
+                  }}
+                  className="w-full border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                >
+                  <option value="">Select Category</option>
+                  <option value="lifestyle">Lifestyle</option>
+                  <option value="running">Running</option>
+                  <option value="basketball">Basketball</option>
+                  <option value="football">Football</option>
+                  <option value="gym and training">Gym and Training</option>
+                </select>
+              </div>
+              <div className="mt-6 flex justify-center space-x-4">
+                <button
+                  onClick={editProduct ? handleEditProduct : handleAddProduct}
+                  className="bg-gradient-to-r from-sky-500 to-sky-700 text-white px-6 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-sky-600 hover:to-sky-800"
+                >
+                  {editProduct ? "Save Changes" : "Add Product"}
+                </button>
+                <button
+                  onClick={() => {
+                    setEditProduct(null);
+                    setShowProductModal(false);
+                  }}
+                  className="bg-gradient-to-r from-red-400 to-red-600 text-white px-6 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-red-500 hover:to-red-700"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Stock Modal */}
-{showStockModal && (
-  <div className="fixed inset-0 flex items-center justify-center bg-sky-200 bg-opacity-70">
-    <div className="bg-white p-8 rounded-2xl shadow-2xl w-96 transform transition-all duration-300 hover:shadow-3xl">
-      <h3 className="text-2xl font-bold text-sky-700 mb-4 text-center">
-        Add Sizes and Stock
-      </h3>
-      <div className="mt-4 space-y-4">
-        {sizes.map((size, index) => (
-          <div key={index} className="flex items-center space-x-2">
-            <input
-              type="text"
-              placeholder="Size"
-              value={size.size}
-              onChange={(e) =>
-                handleSizeChange(index, "size", e.target.value)
-              }
-              className="w-1/2 border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
-            />
-            <input
-              type="number"
-              placeholder="Stock"
-              value={size.stock}
-              onChange={(e) =>
-                handleSizeChange(index, "stock", e.target.value)
-              }
-              className="w-1/2 border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
-            />
+        {showStockModal && (
+          <div className="fixed inset-0 flex items-center justify-center bg-sky-200 bg-opacity-70">
+            <div className="bg-white p-8 rounded-2xl shadow-2xl w-96 transform transition-all duration-300 hover:shadow-3xl">
+              <h3 className="text-2xl font-bold text-sky-700 mb-4 text-center">
+                Add Sizes and Stock
+              </h3>
+              <div className="mt-4 space-y-4">
+                {sizes.map((size, index) => (
+                  <div key={index} className="flex items-center space-x-2">
+                    <input
+                      type="text"
+                      placeholder="Size"
+                      value={size.size}
+                      onChange={(e) =>
+                        handleSizeChange(index, "size", e.target.value)
+                      }
+                      className="w-1/2 border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                    />
+                    <input
+                      type="number"
+                      placeholder="Stock"
+                      value={size.stock}
+                      onChange={(e) =>
+                        handleSizeChange(index, "stock", e.target.value)
+                      }
+                      className="w-1/2 border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                    />
+                  </div>
+                ))}
+                <button
+                  onClick={addSizeInput}
+                  className="w-full mt-4 bg-gradient-to-r from-green-400 to-green-600 text-white px-4 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-green-500 hover:to-green-700"
+                >
+                  Add Size
+                </button>
+              </div>
+              <div className="mt-6 flex justify-center space-x-4">
+                <button
+                  onClick={handleAddSizeStock}
+                  className="bg-gradient-to-r from-sky-500 to-sky-700 text-white px-6 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-sky-600 hover:to-sky-800"
+                >
+                  Save Sizes and Stock
+                </button>
+                <button
+                  onClick={() => setShowStockModal(false)}
+                  className="bg-gradient-to-r from-red-400 to-red-600 text-white px-6 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-red-500 hover:to-red-700"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
           </div>
-        ))}
-        <button
-          onClick={addSizeInput}
-          className="w-full mt-4 bg-gradient-to-r from-green-400 to-green-600 text-white px-4 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-green-500 hover:to-green-700"
-        >
-          Add Size
-        </button>
-      </div>
-      <div className="mt-6 flex justify-center space-x-4">
-        <button
-          onClick={handleAddSizeStock}
-          className="bg-gradient-to-r from-sky-500 to-sky-700 text-white px-6 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-sky-600 hover:to-sky-800"
-        >
-          Save Sizes and Stock
-        </button>
-        <button
-          onClick={() => setShowStockModal(false)}
-          className="bg-gradient-to-r from-red-400 to-red-600 text-white px-6 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-red-500 hover:to-red-700"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+        )}
 
-       {/* Edit Stock Modal */}
-{showEditStockModal && (
-  <div className="fixed inset-0 flex items-center justify-center bg-sky-200 bg-opacity-70">
-    <div className="bg-white p-8 rounded-2xl shadow-2xl w-96 transform transition-all duration-300 hover:shadow-3xl">
-      <h3 className="text-2xl font-bold text-sky-700 mb-4 text-center">
-        Edit Sizes and Stock
-      </h3>
-      <div className="mt-4 space-y-4">
-        {editStock.map((stock, index) => (
-          <div key={index} className="flex items-center space-x-2">
-            <input
-              type="text"
-              placeholder="Size"
-              value={stock.size}
-              onChange={(e) =>
-                handleEditSizeChange(index, "size", e.target.value)
-              }
-              className="w-1/2 border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
-            />
-            <input
-              type="number"
-              placeholder="Stock"
-              value={stock.stock}
-              onChange={(e) =>
-                handleEditSizeChange(index, "stock", e.target.value)
-              }
-              className="w-1/2 border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
-            />
-            <button
-              onClick={() => handleDeleteStock(productId, stock.size)}
-              className="bg-gradient-to-r from-red-400 to-red-600 text-white px-2 py-1 rounded shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-red-500 hover:to-red-700"
-            >
-              Delete
-            </button>
+        {/* Edit Stock Modal */}
+        {showEditStockModal && (
+          <div className="fixed inset-0 flex items-center justify-center bg-sky-200 bg-opacity-70">
+            <div className="bg-white p-8 rounded-2xl shadow-2xl w-96 transform transition-all duration-300 hover:shadow-3xl">
+              <h3 className="text-2xl font-bold text-sky-700 mb-4 text-center">
+                Edit Sizes and Stock
+              </h3>
+              <div className="mt-4 space-y-4">
+                {editStock.map((stock, index) => (
+                  <div key={index} className="flex items-center space-x-2">
+                    <input
+                      type="text"
+                      placeholder="Size"
+                      value={stock.size}
+                      onChange={(e) =>
+                        handleEditSizeChange(index, "size", e.target.value)
+                      }
+                      className="w-1/2 border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                    />
+                    <input
+                      type="number"
+                      placeholder="Stock"
+                      value={stock.stock}
+                      onChange={(e) =>
+                        handleEditSizeChange(index, "stock", e.target.value)
+                      }
+                      className="w-1/2 border border-sky-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-sky-400"
+                    />
+                    <button
+                      onClick={() => handleDeleteStock(productId, stock.size)}
+                      className="bg-gradient-to-r from-red-400 to-red-600 text-white px-2 py-1 rounded shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-red-500 hover:to-red-700"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
+                <button
+                  onClick={addEditSizeInput}
+                  className="w-full mt-4 bg-gradient-to-r from-green-400 to-green-600 text-white px-4 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-green-500 hover:to-green-700"
+                >
+                  Add Size
+                </button>
+              </div>
+              <div className="mt-6 flex justify-center space-x-4">
+                <button
+                  onClick={handleEditStock}
+                  className="bg-gradient-to-r from-sky-500 to-sky-700 text-white px-6 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-sky-600 hover:to-sky-800"
+                >
+                  Save Sizes and Stock
+                </button>
+                <button
+                  onClick={() => setShowEditStockModal(false)}
+                  className="bg-gradient-to-r from-red-400 to-red-600 text-white px-6 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-red-500 hover:to-red-700"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
           </div>
-        ))}
-        <button
-          onClick={addEditSizeInput}
-          className="w-full mt-4 bg-gradient-to-r from-green-400 to-green-600 text-white px-4 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-green-500 hover:to-green-700"
-        >
-          Add Size
-        </button>
-      </div>
-      <div className="mt-6 flex justify-center space-x-4">
-        <button
-          onClick={handleEditStock}
-          className="bg-gradient-to-r from-sky-500 to-sky-700 text-white px-6 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-sky-600 hover:to-sky-800"
-        >
-          Save Sizes and Stock
-        </button>
-        <button
-          onClick={() => setShowEditStockModal(false)}
-          className="bg-gradient-to-r from-red-400 to-red-600 text-white px-6 py-2 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 hover:from-red-500 hover:to-red-700"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
+        )}
 
         {/* Add Admin Modal */}
         {showAddAdminModal && (
