@@ -19,12 +19,12 @@ Jejak gaya adalah platform e-commerce yang khusus menjual sepatu merk Nike. Kami
 
 ![alt text](erd_jejak_gaya.png)
 
-##Tech Stack
+## Tech Stack
 
-Frontend : React.js dan Tailwind CSS
-Backend : Express.js dan Node.js
-DB : PostgreSQL
-Devops : Version control (Git & Github)
+- Frontend : React.js dan Tailwind CSS
+- Backend : Express.js dan Node.js
+- DB : PostgreSQL
+- Devops : Version control (Git & Github)
 
 ## query
 
