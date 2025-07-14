@@ -170,7 +170,7 @@ export default function Cart() {
             <div className="flex justify-between text-gray-800 text-lg mb-6 border-b border-gray-300 pb-4">
               <p className="font-medium">Total:</p>
               <p className="text-xl font-bold text-indigo-600">
-                ${calculateTotal().toFixed(2)}
+                Rp.{calculateTotal().toFixed(2)}
               </p>
             </div>
             <button
